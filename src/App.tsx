@@ -1,13 +1,13 @@
 import React from 'react';
 
+import Routes from './Routes';
+
 import GlobalStyle from './styles/global';
 
 const App: React.FC = () => {
   return (
     <>
-      <div className="App">
-        <h1>Note It</h1>
-      </div>
+      <Routes />
       <GlobalStyle />
     </>
   );
