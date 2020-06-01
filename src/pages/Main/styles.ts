@@ -10,7 +10,7 @@ export const Header = styled.header`
   align-items: center;
 
   h1 {
-    color: #a5b1c4;
+    color: #9caabf;
   }
 `;
 
@@ -38,11 +38,6 @@ export const SearchBar = styled.div`
   display: flex;
   align-items: center;
 
-  margin: 2em 0 2em 0;
-  padding: 1.2em 1em;
-  border-radius: 6px;
-  box-shadow: 7px 7px 14px #d9d9d9, -7px -7px 14px #ffffff;
-
   input {
     flex-grow: 1;
     align-items: center;
@@ -54,7 +49,7 @@ export const SearchBar = styled.div`
     background-color: transparent;
 
     &::placeholder {
-      opacity: 0.8;
+      opacity: 0.5;
       color: #069db7;
     }
   }
@@ -62,7 +57,7 @@ export const SearchBar = styled.div`
   svg {
     height: 1.2em;
     width: 1.2em;
-    opacity: 0.8;
-    color: #15a3bb;
+    opacity: 0.5;
+    color: #069db7;
   }
 `;
