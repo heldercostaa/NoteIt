@@ -2,10 +2,11 @@ import React from 'react';
 import { RiCloseLine } from 'react-icons/ri';
 import ReactModal from 'react-modal';
 
+import AddNoteForm from '../AddNoteForm';
+
 import { CloseButton } from './styles';
 
-const Modal: React.FC<{ isOpen: boolean; handleClose: () => void }> = ({
-  children,
+const AddNoteModal: React.FC<{ isOpen: boolean; handleClose: () => void }> = ({
   isOpen,
   handleClose,
 }) => {
@@ -14,9 +15,10 @@ const Modal: React.FC<{ isOpen: boolean; handleClose: () => void }> = ({
       <CloseButton title="Close Modal" onClick={handleClose}>
         <RiCloseLine />
       </CloseButton>
-      {children}
+
+      <AddNoteForm />
     </ReactModal>
   );
 };
 
-export default Modal;
+export default AddNoteModal;

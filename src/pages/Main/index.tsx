@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { RiAddLine, RiSearch2Line } from 'react-icons/ri';
 
 import NoteCard from '../../components/NoteCard';
-import Modal from '../../components/Modal';
+import AddNoteModal from '../../components/AddNoteModal';
 import { CardContainer } from '../../components/CardContainer';
 
 import { Container, Header, IconButton, SearchBar } from './styles';
@@ -64,9 +64,13 @@ const Main: React.FC = () => {
           pinned={note.pinned}
         />
       ))}
-      <Modal isOpen={isModalVisible} handleClose={(): void => setIsModalVisible(!isModalVisible)}>
+
+      <AddNoteModal
+        isOpen={isModalVisible}
+        handleClose={(): void => setIsModalVisible(!isModalVisible)}
+      >
         Content
-      </Modal>
+      </AddNoteModal>
     </Container>
   );
 };
