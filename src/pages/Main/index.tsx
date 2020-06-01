@@ -3,22 +3,24 @@ import { RiAddLine, RiSearch2Line } from 'react-icons/ri';
 
 import NoteCard from '../../components/NoteCard';
 
-// import { Container } from './styles';
+import { Container, Header, IconButton, SearchBar } from './styles';
 
 const Main: React.FC = () => {
   return (
-    <div>
-      <header>
+    <Container>
+      <Header>
         <h1>Note It</h1>
         <nav>
-          <RiAddLine size={14} />
+          <IconButton>
+            <RiAddLine />
+          </IconButton>
         </nav>
-      </header>
+      </Header>
 
-      <div>
-        <RiSearch2Line size={12} />
+      <SearchBar>
+        <RiSearch2Line />
         <input type="text" placeholder="Search" />
-      </div>
+      </SearchBar>
 
       <NoteCard
         date="12.02.19"
@@ -26,7 +28,7 @@ const Main: React.FC = () => {
         body="Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque, soluta?"
         pinned
       />
-    </div>
+    </Container>
   );
 };
 
