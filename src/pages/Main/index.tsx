@@ -42,8 +42,8 @@ const Main: React.FC = () => {
       <Header>
         <h1>Note It</h1>
         <nav>
-          <IconButton>
-            <RiAddLine onClick={(): void => setIsModalVisible(!isModalVisible)} />
+          <IconButton onClick={(): void => setIsModalVisible(!isModalVisible)}>
+            <RiAddLine />
           </IconButton>
         </nav>
       </Header>
