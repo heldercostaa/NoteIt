@@ -23,19 +23,19 @@ const AddNoteForm: React.FC = () => {
             onBlur={({ target: { value } }): void => setDate(value)}
           />
 
-          <Pin pinned={pinned} onClick={(): void => setPinned(!pinned)}>
+          <Pin pinned={pinned} type="button" onClick={(): void => setPinned(!pinned)}>
             <RiPushpinLine />
           </Pin>
         </header>
 
         <TitleInput
           type="text"
-          placeholder=""
+          placeholder="Amazing story"
           onBlur={({ target: { value } }): void => setTitle(value)}
         />
 
         <TextArea
-          placeholder="Once upon a time..."
+          placeholder="Once upon a time, in a land far, far away..."
           onBlur={({ target: { value } }): void => setBody(value)}
         />
       </Form>

@@ -9,7 +9,6 @@ export const Note = styled.div`
 
     svg {
       color: #9caabf;
-      opacity: 0.5;
       width: 1.5em;
       height: 1.5em;
     }
