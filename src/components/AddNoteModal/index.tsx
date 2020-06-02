@@ -20,4 +20,6 @@ const AddNoteModal: React.FC<{ isOpen: boolean; handleClose: () => void }> = ({
   );
 };
 
+Modal.setAppElement('#root');
+
 export default AddNoteModal;
