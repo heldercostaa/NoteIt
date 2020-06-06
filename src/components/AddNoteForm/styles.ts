@@ -78,6 +78,7 @@ export const TitleInput = styled.input`
   font-size: 1.5em;
   font-weight: bold;
   margin: 0.2em 0 0.4em 0;
+  width: 100%;
 `;
 
 export const TextArea = styled(TextareaAutosize)`

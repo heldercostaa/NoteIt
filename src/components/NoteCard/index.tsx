@@ -1,7 +1,7 @@
 import React from 'react';
 import { RiPushpinLine } from 'react-icons/ri';
 
-import { CardContainer } from '../CardContainer';
+import CardContainer from '../CardContainer';
 
 import { Note } from './styles';
 

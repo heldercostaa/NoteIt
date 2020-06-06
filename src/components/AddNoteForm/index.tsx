@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { RiPushpinLine } from 'react-icons/ri';
 
-import { CardContainer } from '../CardContainer';
+import CardContainer from '../CardContainer';
 
 import { Form, DateInput, Pin, TitleInput, TextArea } from './styles';
 
