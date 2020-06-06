@@ -36,7 +36,7 @@ const NoteForm: React.FC<{ submitNote(note: Note): void; editNote?: Note }> = ({
   submitNote,
   editNote,
 }) => {
-  const [note, setNote] = useState<Note>({ date: formatToday(), pinned: editNote?.pinned } as Note);
+  const [note, setNote] = useState<Note>({ ...editNote, date: formatToday() } as Note);
 
   function handlePinned(): void {
     setNote({ ...note, pinned: !note.pinned });
