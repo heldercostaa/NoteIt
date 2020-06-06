@@ -1,29 +1,65 @@
-import React, { useState } from 'react';
+import React, { useState, FormEvent } from 'react';
 import { RiPushpinLine } from 'react-icons/ri';
 
 import CardContainer from '../CardContainer';
 
-import { Form, DateInput, Pin, TitleInput, TextArea } from './styles';
+import { Note } from '../../pages/Main';
 
-const AddNoteForm: React.FC = () => {
-  const [date, setDate] = useState('');
-  const [pinned, setPinned] = useState(false);
-  const [title, setTitle] = useState('');
-  const [body, setBody] = useState('');
+import { Form, DateStyle, Pin, TitleInput, TextArea, AddButton } from './styles';
 
-  console.log(date, title, body);
+function formatToday(): string {
+  const months = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec',
+  ];
+
+  const today = new Date();
+
+  const month = months[today.getMonth()];
+  const day = today.getDate();
+  const year = today.getFullYear();
+
+  return `${month} ${day}, ${year}`;
+}
+
+const AddNoteForm: React.FC<{ submitNote(note: Note): void }> = ({ submitNote }) => {
+  const [note, setNote] = useState<Note>({ date: formatToday() } as Note);
+
+  function handlePinned(): void {
+    setNote({ ...note, pinned: !note.pinned });
+  }
+
+  function handleTitle(title: string): void {
+    setNote({ ...note, title });
+  }
+
+  function handleBody(body: string): void {
+    setNote({ ...note, body });
+  }
+
+  function handleSubmit(e: FormEvent): void {
+    e.preventDefault();
+
+    submitNote(note);
+  }
 
   return (
     <CardContainer>
-      <Form>
+      <Form onSubmit={handleSubmit}>
         <header>
-          <DateInput
-            type="text"
-            placeholder="6.01.19"
-            onBlur={({ target: { value } }): void => setDate(value)}
-          />
+          <DateStyle>{note.date}</DateStyle>
 
-          <Pin pinned={pinned} type="button" onClick={(): void => setPinned(!pinned)}>
+          <Pin pinned={note.pinned} type="button" onClick={handlePinned}>
             <RiPushpinLine />
           </Pin>
         </header>
@@ -31,13 +67,15 @@ const AddNoteForm: React.FC = () => {
         <TitleInput
           type="text"
           placeholder="Amazing story"
-          onBlur={({ target: { value } }): void => setTitle(value)}
+          onBlur={({ target: { value } }): void => handleTitle(value)}
         />
 
         <TextArea
           placeholder="Once upon a time, in a land far, far away..."
-          onBlur={({ target: { value } }): void => setBody(value)}
+          onBlur={({ target: { value } }): void => handleBody(value)}
         />
+
+        <AddButton>Add</AddButton>
       </Form>
     </CardContainer>
   );

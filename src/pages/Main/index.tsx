@@ -8,7 +8,7 @@ import CardContainer from '../../components/CardContainer';
 
 import { Container, Header, SearchBar } from './styles';
 
-interface Note {
+export interface Note {
   date: string;
   title: string;
   body: string;
@@ -17,7 +17,7 @@ interface Note {
 
 const Main: React.FC = () => {
   const [isModalVisible, setIsModalVisible] = useState(true);
-  const [notes] = useState<Note[]>([
+  const [notes, setNotes] = useState<Note[]>([
     {
       date: '12.02.19',
       title: 'Plants',
@@ -37,6 +37,12 @@ const Main: React.FC = () => {
         '- Finish my project on lake ecology;\n- Read my book collection on leadership;\n- Make some t-shirt with Green Club logo;',
     },
   ]);
+
+  function handleSubmit(note: Note): void {
+    setNotes([...notes, note]);
+
+    setIsModalVisible(!isModalVisible);
+  }
 
   return (
     <Container>
@@ -68,6 +74,7 @@ const Main: React.FC = () => {
       <AddNoteModal
         isOpen={isModalVisible}
         handleClose={(): void => setIsModalVisible(!isModalVisible)}
+        handleSubmit={handleSubmit}
       >
         Content
       </AddNoteModal>

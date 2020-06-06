@@ -56,11 +56,11 @@ export const Form = styled.form`
   }
 `;
 
-export const DateInput = styled.input`
+export const DateStyle = styled.span`
   color: #9caabf;
 `;
 
-export const Pin = styled.button<{ pinned: boolean }>`
+export const Pin = styled.button<{ pinned?: boolean }>`
   svg {
     opacity: ${({ pinned }) => (pinned ? '1' : '0.5')};
     color: #9caabf;
@@ -85,8 +85,7 @@ export const TextArea = styled(TextareaAutosize)`
   color: #576785;
   font-family: inherit;
   width: 100%;
-  height: 10vh;
-  outline: none;
+  height: 7vh;
   border: none;
   background: none;
   resize: none;
@@ -94,4 +93,15 @@ export const TextArea = styled(TextareaAutosize)`
   &::placeholder {
     opacity: 0.5;
   }
+`;
+
+export const AddButton = styled.button.attrs({ type: 'submit' })`
+  color: #069db7;
+
+  text-transform: uppercase;
+  font-family: Arial;
+  font-size: 1.1rem;
+
+  display: block;
+  margin: 1rem 1em 0 auto;
 `;
