@@ -51,7 +51,8 @@ const Main: React.FC = () => {
   }
 
   function handleSubmit(note: Note): void {
-    setNotes([...notes, note]);
+    const updatedNotes = notes.filter((n) => n.id !== note.id);
+    setNotes([...updatedNotes, note]);
 
     setIsModalVisible(false);
     setSelectedNote(undefined);
@@ -61,8 +62,6 @@ const Main: React.FC = () => {
     setIsModalVisible(true);
     setSelectedNote(note);
   }
-
-  console.log(notes);
 
   return (
     <Container>
