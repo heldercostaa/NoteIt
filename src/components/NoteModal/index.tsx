@@ -1,13 +1,13 @@
 import React from 'react';
 import { RiCloseLine } from 'react-icons/ri';
 
-import AddNoteForm from '../AddNoteForm';
+import NoteForm from '../NoteForm';
 
 import { Note } from '../../pages/Main';
 
 import { CloseButton, Modal } from './styles';
 
-const AddNoteModal: React.FC<{
+const NoteModal: React.FC<{
   isOpen: boolean;
   handleClose: () => void;
   handleSubmit(note: Note): void;
@@ -18,11 +18,11 @@ const AddNoteModal: React.FC<{
         <RiCloseLine />
       </CloseButton>
 
-      <AddNoteForm submitNote={handleSubmit} />
+      <NoteForm submitNote={handleSubmit} />
     </Modal>
   );
 };
 
 Modal.setAppElement('#root');
 
-export default AddNoteModal;
+export default NoteModal;

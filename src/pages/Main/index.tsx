@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { RiAddLine, RiSearch2Line } from 'react-icons/ri';
 
 import NoteCard from '../../components/NoteCard';
-import AddNoteModal from '../../components/AddNoteModal';
+import NoteModal from '../../components/NoteModal';
 import FloatingButton from '../../components/FloatingButton';
 import CardContainer from '../../components/CardContainer';
 
@@ -71,13 +71,13 @@ const Main: React.FC = () => {
         />
       ))}
 
-      <AddNoteModal
+      <NoteModal
         isOpen={isModalVisible}
         handleClose={(): void => setIsModalVisible(!isModalVisible)}
         handleSubmit={handleSubmit}
       >
         Content
-      </AddNoteModal>
+      </NoteModal>
     </Container>
   );
 };

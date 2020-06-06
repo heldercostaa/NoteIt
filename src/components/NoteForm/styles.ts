@@ -95,7 +95,7 @@ export const TextArea = styled(TextareaAutosize)`
   }
 `;
 
-export const AddButton = styled.button.attrs({ type: 'submit' })`
+export const Button = styled.button.attrs({ type: 'submit' })`
   color: #069db7;
 
   text-transform: uppercase;

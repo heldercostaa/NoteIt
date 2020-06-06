@@ -5,7 +5,7 @@ import CardContainer from '../CardContainer';
 
 import { Note } from '../../pages/Main';
 
-import { Form, DateStyle, Pin, TitleInput, TextArea, AddButton } from './styles';
+import { Form, DateStyle, Pin, TitleInput, TextArea, Button } from './styles';
 
 function formatToday(): string {
   const months = [
@@ -32,7 +32,7 @@ function formatToday(): string {
   return `${month} ${day}, ${year}`;
 }
 
-const AddNoteForm: React.FC<{ submitNote(note: Note): void }> = ({ submitNote }) => {
+const NoteForm: React.FC<{ submitNote(note: Note): void }> = ({ submitNote }) => {
   const [note, setNote] = useState<Note>({ date: formatToday() } as Note);
 
   function handlePinned(): void {
@@ -75,10 +75,10 @@ const AddNoteForm: React.FC<{ submitNote(note: Note): void }> = ({ submitNote })
           onBlur={({ target: { value } }): void => handleBody(value)}
         />
 
-        <AddButton>Add</AddButton>
+        <Button>Add</Button>
       </Form>
     </CardContainer>
   );
 };
 
-export default AddNoteForm;
+export default NoteForm;
