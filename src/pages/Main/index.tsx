@@ -40,6 +40,11 @@ const Main: React.FC = () => {
     },
   ]);
 
+  function handleClose(): void {
+    setIsModalVisible(false);
+    setSelectedNote(undefined);
+  }
+
   function handleSubmit(note: Note): void {
     setNotes([...notes, note]);
 
@@ -75,7 +80,7 @@ const Main: React.FC = () => {
 
       <NoteModal
         isOpen={isModalVisible}
-        handleClose={(): void => setIsModalVisible(!isModalVisible)}
+        handleClose={handleClose}
         handleSubmit={handleSubmit}
         editNote={selectedNote}
       >
