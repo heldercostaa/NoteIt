@@ -23,6 +23,7 @@ export const Content = styled.div`
 
   p {
     color: #576785;
+    white-space: pre-line;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
