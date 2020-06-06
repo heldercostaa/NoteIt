@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { RiAddLine, RiSearch2Line } from 'react-icons/ri';
+import { v4 as uuid } from 'uuid';
 
 import NoteCard from '../../components/NoteCard';
 import NoteModal from '../../components/NoteModal';
@@ -9,6 +10,7 @@ import CardContainer from '../../components/CardContainer';
 import { Container, Header, SearchBar } from './styles';
 
 export interface Note {
+  id: string;
   date: string;
   title: string;
   body: string;
@@ -21,18 +23,21 @@ const Main: React.FC = () => {
 
   const [notes, setNotes] = useState<Note[]>([
     {
+      id: uuid(),
       date: '12.02.19',
       title: 'Plants',
       body: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque, soluta?',
       pinned: true,
     },
     {
+      id: uuid(),
       date: '5.03.19',
       title: 'Principle of relativity',
       body:
         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident, iusto. Quidem consequatur nam sint. Quod nulla deserunt, error itaque, distinctio nihil neque molestias et minus dignissimos nesciunt veniam aliquid est.',
     },
     {
+      id: uuid(),
       date: '1.03.19',
       title: 'Summer goals',
       body:
@@ -57,6 +62,8 @@ const Main: React.FC = () => {
     setSelectedNote(note);
   }
 
+  console.log(notes);
+
   return (
     <Container>
       <FloatingButton onClick={(): void => setIsModalVisible(!isModalVisible)}>
@@ -75,7 +82,7 @@ const Main: React.FC = () => {
       </CardContainer>
 
       {notes.map((note) => (
-        <NoteCard key={note.title} note={note} handleEdit={(): void => handleEdit(note)} />
+        <NoteCard key={note.id} note={note} handleEdit={(): void => handleEdit(note)} />
       ))}
 
       <NoteModal

@@ -1,5 +1,6 @@
 import React, { useState, FormEvent } from 'react';
 import { RiPushpinLine } from 'react-icons/ri';
+import { v4 as uuid } from 'uuid';
 
 import CardContainer from '../CardContainer';
 
@@ -37,6 +38,8 @@ const NoteForm: React.FC<{ submitNote(note: Note): void; editNote?: Note }> = ({
   editNote,
 }) => {
   const [note, setNote] = useState<Note>({ ...editNote, date: formatToday() } as Note);
+
+  if (!note.id) setNote({ ...note, id: uuid() });
 
   function handlePinned(): void {
     setNote({ ...note, pinned: !note.pinned });

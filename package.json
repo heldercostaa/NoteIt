@@ -13,6 +13,7 @@
     "@types/react-modal": "^3.10.5",
     "@types/react-router-dom": "^5.1.5",
     "@types/styled-components": "^5.1.0",
+    "@types/uuid": "^8.0.0",
     "poetic": "^1.5.0",
     "typescript": "~3.7.2"
   },
@@ -24,7 +25,8 @@
     "react-modal": "^3.11.2",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
-    "styled-components": "^5.1.1"
+    "styled-components": "^5.1.1",
+    "uuid": "^8.1.0"
   },
   "scripts": {
     "start": "yarn code:check && react-scripts start",
