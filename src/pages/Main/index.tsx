@@ -17,6 +17,8 @@ export interface Note {
 
 const Main: React.FC = () => {
   const [isModalVisible, setIsModalVisible] = useState(true);
+  const [selectedNote, setSelectedNote] = useState<Note | undefined>(undefined);
+
   const [notes, setNotes] = useState<Note[]>([
     {
       date: '12.02.19',
@@ -41,7 +43,13 @@ const Main: React.FC = () => {
   function handleSubmit(note: Note): void {
     setNotes([...notes, note]);
 
-    setIsModalVisible(!isModalVisible);
+    setIsModalVisible(false);
+    setSelectedNote(undefined);
+  }
+
+  function handleEdit(note: Note): void {
+    setIsModalVisible(true);
+    setSelectedNote(note);
   }
 
   return (
@@ -62,19 +70,14 @@ const Main: React.FC = () => {
       </CardContainer>
 
       {notes.map((note) => (
-        <NoteCard
-          key={note.title}
-          date={note.date}
-          title={note.title}
-          body={note.body}
-          pinned={note.pinned}
-        />
+        <NoteCard key={note.title} note={note} handleEdit={(): void => handleEdit(note)} />
       ))}
 
       <NoteModal
         isOpen={isModalVisible}
         handleClose={(): void => setIsModalVisible(!isModalVisible)}
         handleSubmit={handleSubmit}
+        editNote={selectedNote}
       >
         Content
       </NoteModal>

@@ -2,25 +2,21 @@ import React from 'react';
 import { RiPushpinLine } from 'react-icons/ri';
 
 import CardContainer from '../CardContainer';
+import { Note } from '../../pages/Main';
 
-import { Note } from './styles';
+import { Content } from './styles';
 
-const NoteCard: React.FC<{ date: string; title: string; body: string; pinned?: boolean }> = ({
-  date,
-  title,
-  body,
-  pinned,
-}) => {
+const NoteCard: React.FC<{ note: Note; handleEdit?(): void }> = ({ note, handleEdit }) => {
   return (
     <CardContainer>
-      <Note>
+      <Content onClick={handleEdit}>
         <header>
-          <span>{date}</span>
-          {pinned && <RiPushpinLine />}
+          <span>{note.date}</span>
+          {note.pinned && <RiPushpinLine />}
         </header>
-        <h2>{title}</h2>
-        <p>{body}</p>
-      </Note>
+        <h2>{note.title}</h2>
+        <p>{note.body}</p>
+      </Content>
     </CardContainer>
   );
 };

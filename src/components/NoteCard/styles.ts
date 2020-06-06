@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
-export const Note = styled.div`
+export const Content = styled.div`
+  cursor: pointer;
+
   header {
     display: flex;
     justify-content: space-between;

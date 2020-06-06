@@ -32,8 +32,11 @@ function formatToday(): string {
   return `${month} ${day}, ${year}`;
 }
 
-const NoteForm: React.FC<{ submitNote(note: Note): void }> = ({ submitNote }) => {
-  const [note, setNote] = useState<Note>({ date: formatToday() } as Note);
+const NoteForm: React.FC<{ submitNote(note: Note): void; editNote?: Note }> = ({
+  submitNote,
+  editNote,
+}) => {
+  const [note, setNote] = useState<Note>({ date: formatToday(), pinned: editNote?.pinned } as Note);
 
   function handlePinned(): void {
     setNote({ ...note, pinned: !note.pinned });
@@ -67,15 +70,17 @@ const NoteForm: React.FC<{ submitNote(note: Note): void }> = ({ submitNote }) =>
         <TitleInput
           type="text"
           placeholder="Amazing story"
+          defaultValue={editNote?.title}
           onBlur={({ target: { value } }): void => handleTitle(value)}
         />
 
         <TextArea
           placeholder="Once upon a time, in a land far, far away..."
+          defaultValue={editNote?.body}
           onBlur={({ target: { value } }): void => handleBody(value)}
         />
 
-        <Button>Add</Button>
+        <Button>{editNote ? 'Save' : 'Add'}</Button>
       </Form>
     </CardContainer>
   );
