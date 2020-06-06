@@ -35,16 +35,11 @@ export const CloseButton = styled.button.attrs((props) => ({
   type: 'button',
   title: props.title,
 }))`
-  display: flex;
-  justify-content: flex-end;
-  width: 100%;
-
-  margin: 0 0 -1em -1em;
+  float: right;
+  cursor: pointer;
 
   border: none;
   background: transparent;
-
-  cursor: pointer;
 
   svg {
     width: 1.5rem;
