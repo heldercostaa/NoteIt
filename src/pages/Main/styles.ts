@@ -14,27 +14,6 @@ export const Header = styled.header`
   }
 `;
 
-export const IconButton = styled.button.attrs({
-  type: 'button',
-})`
-  background: #f9f9f9;
-  border: 0;
-  padding: 0.5em;
-  border-radius: 50%;
-  border: 1.25px solid #fff;
-  box-shadow: 10px 10px 20px #e0e5e9, -10px -10px 20px #f6f6f6;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  svg {
-    color: #069db7;
-    width: 2em;
-    height: 2em;
-  }
-`;
-
 export const SearchBar = styled.div`
   display: flex;
   align-items: center;

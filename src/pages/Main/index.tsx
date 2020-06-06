@@ -3,9 +3,10 @@ import { RiAddLine, RiSearch2Line } from 'react-icons/ri';
 
 import NoteCard from '../../components/NoteCard';
 import AddNoteModal from '../../components/AddNoteModal';
-import { CardContainer } from '../../components/CardContainer';
+import FloatingButton from '../../components/FloatingButton';
+import CardContainer from '../../components/CardContainer';
 
-import { Container, Header, IconButton, SearchBar } from './styles';
+import { Container, Header, SearchBar } from './styles';
 
 interface Note {
   date: string;
@@ -15,7 +16,7 @@ interface Note {
 }
 
 const Main: React.FC = () => {
-  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(true);
   const [notes] = useState<Note[]>([
     {
       date: '12.02.19',
@@ -39,13 +40,12 @@ const Main: React.FC = () => {
 
   return (
     <Container>
+      <FloatingButton onClick={(): void => setIsModalVisible(!isModalVisible)}>
+        <RiAddLine />
+      </FloatingButton>
+
       <Header>
         <h1>Note It</h1>
-        <nav>
-          <IconButton onClick={(): void => setIsModalVisible(!isModalVisible)}>
-            <RiAddLine />
-          </IconButton>
-        </nav>
       </Header>
 
       <CardContainer>
