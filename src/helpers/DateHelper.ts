@@ -1,7 +1,7 @@
 /* eslint-disable class-methods-use-this */
 
 class DateHelper {
-  formatDate(date: Date): string {
+  formatNow(): string {
     const months = [
       'Jan',
       'Feb',
@@ -17,9 +17,11 @@ class DateHelper {
       'Dec',
     ];
 
-    const month = months[date.getMonth()];
-    const day = date.getDate();
-    const year = date.getFullYear();
+    const now = new Date();
+
+    const month = months[now.getMonth()];
+    const day = now.getDate();
+    const year = now.getFullYear();
 
     return `${month} ${day}, ${year}`;
   }

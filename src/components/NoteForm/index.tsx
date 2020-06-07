@@ -6,13 +6,24 @@ import CardContainer from '../CardContainer';
 
 import { Note } from '../../pages/Main';
 
+import dateHelper from '../../helpers/DateHelper';
+
 import { Form, DateStyle, Pin, TitleInput, TextArea, Button } from './styles';
 
 const NoteForm: React.FC<{ submitNote(note: Note): void; editNote?: Note }> = ({
   submitNote,
   editNote,
 }) => {
-  const [note, setNote] = useState<Note>({ ...editNote } as Note);
+  const [note, setNote] = useState<Note>({
+    ...(editNote || {
+      id: uuid(),
+      pinned: false,
+      title: '',
+      body: '',
+      date: Date.now(),
+      formatedDate: '',
+    }),
+  });
 
   if (!note.id) setNote({ ...note, id: uuid() });
   if (note.pinned === undefined) setNote({ ...note, pinned: false });
@@ -32,7 +43,7 @@ const NoteForm: React.FC<{ submitNote(note: Note): void; editNote?: Note }> = ({
   function handleSubmit(e: FormEvent): void {
     e.preventDefault();
 
-    submitNote(note);
+    submitNote({ ...note, date: Date.now(), formatedDate: dateHelper.formatNow() });
   }
 
   return (

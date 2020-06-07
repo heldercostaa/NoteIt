@@ -6,13 +6,11 @@ import NoteModal from '../../components/NoteModal';
 import FloatingButton from '../../components/FloatingButton';
 import CardContainer from '../../components/CardContainer';
 
-import dateHelper from '../../helpers/DateHelper';
-
 import { Container, Header, SearchBar } from './styles';
 
 export interface Note {
   id: string;
-  date: Date;
+  date: number;
   formatedDate: string;
   title: string;
   body: string;
@@ -22,6 +20,7 @@ export interface Note {
 const Main: React.FC = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedNote, setSelectedNote] = useState<Note | undefined>(undefined);
+  const [searchText, setSearchText] = useState('');
 
   const [notes, setNotes] = useState<Note[]>([]);
 
@@ -43,11 +42,8 @@ const Main: React.FC = () => {
   }
 
   function handleSubmit(note: Note): void {
-    const today = new Date();
-    const newNote = { ...note, date: today, formatedDate: dateHelper.formatDate(today) };
-
-    const updatedNotes = notes.filter((n) => n.id !== newNote.id);
-    setNotes([...updatedNotes, newNote]);
+    const updatedNotes = notes.filter((n) => n.id !== note.id);
+    setNotes([...updatedNotes, note]);
 
     setIsModalVisible(false);
     setSelectedNote(undefined);
@@ -56,6 +52,14 @@ const Main: React.FC = () => {
   function handleEdit(note: Note): void {
     setIsModalVisible(true);
     setSelectedNote(note);
+  }
+
+  function searchInNote(note: Note): boolean {
+    return (
+      note.title.toLowerCase().includes(searchText) ||
+      note.body.toLowerCase().includes(searchText) ||
+      note.formatedDate.toLowerCase().includes(searchText)
+    );
   }
 
   return (
@@ -71,12 +75,17 @@ const Main: React.FC = () => {
       <CardContainer>
         <SearchBar>
           <RiSearch2Line />
-          <input type="text" placeholder="Search" />
+          <input
+            type="text"
+            placeholder="Search"
+            onChange={({ target: { value } }): void => setSearchText(value.trim().toLowerCase())}
+          />
         </SearchBar>
       </CardContainer>
 
       {notes
         .slice()
+        .filter((note) => searchInNote(note))
         .sort(
           // First order by pinned then by date
           (n1, n2) => Number(n2.pinned) - Number(n1.pinned) || Number(n2.date) - Number(n1.date),
