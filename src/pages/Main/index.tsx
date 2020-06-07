@@ -1,20 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { RiAddLine, RiSearch2Line } from 'react-icons/ri';
-// import { v4 as uuid } from 'uuid';
 
 import NoteCard from '../../components/NoteCard';
 import NoteModal from '../../components/NoteModal';
 import FloatingButton from '../../components/FloatingButton';
 import CardContainer from '../../components/CardContainer';
 
+import dateHelper from '../../helpers/DateHelper';
+
 import { Container, Header, SearchBar } from './styles';
 
 export interface Note {
   id: string;
-  date: string;
+  date: Date;
+  formatedDate: string;
   title: string;
   body: string;
-  pinned?: boolean;
+  pinned: boolean;
 }
 
 const Main: React.FC = () => {
@@ -41,8 +43,11 @@ const Main: React.FC = () => {
   }
 
   function handleSubmit(note: Note): void {
-    const updatedNotes = notes.filter((n) => n.id !== note.id);
-    setNotes([...updatedNotes, note]);
+    const today = new Date();
+    const newNote = { ...note, date: today, formatedDate: dateHelper.formatDate(today) };
+
+    const updatedNotes = notes.filter((n) => n.id !== newNote.id);
+    setNotes([...updatedNotes, newNote]);
 
     setIsModalVisible(false);
     setSelectedNote(undefined);
@@ -70,9 +75,15 @@ const Main: React.FC = () => {
         </SearchBar>
       </CardContainer>
 
-      {notes.map((note) => (
-        <NoteCard key={note.id} note={note} handleEdit={(): void => handleEdit(note)} />
-      ))}
+      {notes
+        .slice()
+        .sort(
+          // First order by pinned then by date
+          (n1, n2) => Number(n2.pinned) - Number(n1.pinned) || Number(n2.date) - Number(n1.date),
+        )
+        .map((note) => (
+          <NoteCard key={note.id} note={note} handleEdit={(): void => handleEdit(note)} />
+        ))}
 
       <NoteModal
         isOpen={isModalVisible}

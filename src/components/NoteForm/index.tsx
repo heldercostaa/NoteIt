@@ -8,38 +8,14 @@ import { Note } from '../../pages/Main';
 
 import { Form, DateStyle, Pin, TitleInput, TextArea, Button } from './styles';
 
-function formatToday(): string {
-  const months = [
-    'Jan',
-    'Feb',
-    'Mar',
-    'Apr',
-    'May',
-    'Jun',
-    'Jul',
-    'Aug',
-    'Sep',
-    'Oct',
-    'Nov',
-    'Dec',
-  ];
-
-  const today = new Date();
-
-  const month = months[today.getMonth()];
-  const day = today.getDate();
-  const year = today.getFullYear();
-
-  return `${month} ${day}, ${year}`;
-}
-
 const NoteForm: React.FC<{ submitNote(note: Note): void; editNote?: Note }> = ({
   submitNote,
   editNote,
 }) => {
-  const [note, setNote] = useState<Note>({ ...editNote, date: formatToday() } as Note);
+  const [note, setNote] = useState<Note>({ ...editNote } as Note);
 
   if (!note.id) setNote({ ...note, id: uuid() });
+  if (note.pinned === undefined) setNote({ ...note, pinned: false });
 
   function handlePinned(): void {
     setNote({ ...note, pinned: !note.pinned });
@@ -63,7 +39,7 @@ const NoteForm: React.FC<{ submitNote(note: Note): void; editNote?: Note }> = ({
     <CardContainer>
       <Form onSubmit={handleSubmit}>
         <header>
-          <DateStyle>{note.date}</DateStyle>
+          <DateStyle>{note.formatedDate}</DateStyle>
 
           <Pin pinned={note.pinned} type="button" onClick={handlePinned}>
             <RiPushpinLine />

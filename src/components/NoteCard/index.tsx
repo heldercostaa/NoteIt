@@ -11,7 +11,7 @@ const NoteCard: React.FC<{ note: Note; handleEdit?(): void }> = ({ note, handleE
     <CardContainer>
       <Content onClick={handleEdit}>
         <header>
-          <span>{note.date}</span>
+          <span>{note.formatedDate}</span>
           {note.pinned && <RiPushpinLine />}
         </header>
         <h2>{note.title}</h2>
