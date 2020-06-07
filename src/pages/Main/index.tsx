@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { RiAddLine, RiSearch2Line } from 'react-icons/ri';
-import { v4 as uuid } from 'uuid';
+// import { v4 as uuid } from 'uuid';
 
 import NoteCard from '../../components/NoteCard';
 import NoteModal from '../../components/NoteModal';
@@ -18,32 +18,22 @@ export interface Note {
 }
 
 const Main: React.FC = () => {
-  const [isModalVisible, setIsModalVisible] = useState(true);
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedNote, setSelectedNote] = useState<Note | undefined>(undefined);
 
-  const [notes, setNotes] = useState<Note[]>([
-    {
-      id: uuid(),
-      date: '12.02.19',
-      title: 'Plants',
-      body: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque, soluta?',
-      pinned: true,
-    },
-    {
-      id: uuid(),
-      date: '5.03.19',
-      title: 'Principle of relativity',
-      body:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident, iusto. Quidem consequatur nam sint. Quod nulla deserunt, error itaque, distinctio nihil neque molestias et minus dignissimos nesciunt veniam aliquid est.',
-    },
-    {
-      id: uuid(),
-      date: '1.03.19',
-      title: 'Summer goals',
-      body:
-        '- Finish my project on lake ecology;\n- Read my book collection on leadership;\n- Make some t-shirt with Green Club logo;',
-    },
-  ]);
+  const [notes, setNotes] = useState<Note[]>([]);
+
+  useEffect(() => {
+    const storedNotes = localStorage.getItem('notes');
+
+    if (storedNotes) {
+      setNotes(JSON.parse(storedNotes));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('notes', JSON.stringify(notes));
+  }, [notes]);
 
   function handleClose(): void {
     setIsModalVisible(false);
