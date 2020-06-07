@@ -1,8 +1,10 @@
 import styled from 'styled-components';
 
-export const Content = styled.div`
+export const Card = styled.div`
   cursor: pointer;
+`;
 
+export const Content = styled.div`
   header {
     display: flex;
     justify-content: space-between;
