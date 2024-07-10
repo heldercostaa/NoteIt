@@ -8,12 +8,22 @@ import { Note } from '../../pages/Main';
 
 import dateHelper from '../../helpers/DateHelper';
 
-import { Form, DateStyle, Pin, TitleInput, TextArea, Button } from './styles';
+import {
+  Form,
+  DateStyle,
+  Pin,
+  TitleInput,
+  TextArea,
+  Button,
+  DeleteButton,
+  ButtonsContainer,
+} from './styles';
 
-const NoteForm: React.FC<{ submitNote(note: Note): void; editNote?: Note }> = ({
-  submitNote,
-  editNote,
-}) => {
+const NoteForm: React.FC<{
+  submitNote(note: Note): void;
+  editNote?: Note;
+  deleteNote(id: string): void;
+}> = ({ submitNote, editNote, deleteNote }) => {
   const [note, setNote] = useState<Note>({
     ...(editNote || {
       id: uuid(),
@@ -46,6 +56,10 @@ const NoteForm: React.FC<{ submitNote(note: Note): void; editNote?: Note }> = ({
     submitNote({ ...note, date: Date.now(), formatedDate: dateHelper.formatNow() });
   }
 
+  function handleDelete(): void {
+    if (editNote?.id) deleteNote(editNote.id);
+  }
+
   return (
     <CardContainer>
       <Form onSubmit={handleSubmit}>
@@ -70,7 +84,10 @@ const NoteForm: React.FC<{ submitNote(note: Note): void; editNote?: Note }> = ({
           onBlur={({ target: { value } }): void => handleBody(value)}
         />
 
-        <Button>{editNote ? 'Save' : 'Add'}</Button>
+        <ButtonsContainer>
+          {editNote && <DeleteButton onClick={handleDelete}>Delete</DeleteButton>}
+          <Button>{editNote ? 'Save' : 'Add'}</Button>
+        </ButtonsContainer>
       </Form>
     </CardContainer>
   );

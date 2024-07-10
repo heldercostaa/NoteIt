@@ -49,6 +49,14 @@ const Main: React.FC = () => {
     setSelectedNote(undefined);
   }
 
+  function handleDelete(id: string): void {
+    const updatedNotes = notes.filter((n) => n.id !== id);
+    setNotes([...updatedNotes]);
+
+    setIsModalVisible(false);
+    setSelectedNote(undefined);
+  }
+
   function handleEdit(note: Note): void {
     setIsModalVisible(true);
     setSelectedNote(note);
@@ -69,7 +77,7 @@ const Main: React.FC = () => {
       </FloatingButton>
 
       <Header>
-        <h1>Note It</h1>
+        <h1>Note.it</h1>
       </Header>
 
       <CardContainer>
@@ -99,6 +107,7 @@ const Main: React.FC = () => {
         handleClose={handleClose}
         handleSubmit={handleSubmit}
         editNote={selectedNote}
+        handleDelete={handleDelete}
       >
         Content
       </NoteModal>

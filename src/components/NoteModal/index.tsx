@@ -11,15 +11,16 @@ const NoteModal: React.FC<{
   isOpen: boolean;
   handleClose: () => void;
   handleSubmit(note: Note): void;
+  handleDelete(id: string): void;
   editNote?: Note;
-}> = ({ isOpen, handleClose, handleSubmit, editNote }) => {
+}> = ({ isOpen, handleClose, handleSubmit, editNote, handleDelete }) => {
   return (
     <Modal isOpen={isOpen}>
       <CloseButton title="Close Modal" onClick={handleClose}>
         <RiCloseLine />
       </CloseButton>
 
-      <NoteForm submitNote={handleSubmit} editNote={editNote} />
+      <NoteForm submitNote={handleSubmit} deleteNote={handleDelete} editNote={editNote} />
     </Modal>
   );
 };

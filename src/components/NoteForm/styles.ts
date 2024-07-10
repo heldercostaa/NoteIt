@@ -44,7 +44,7 @@ export const Form = styled.form`
     background: none;
 
     &::placeholder {
-      opacity: 0.5;
+      opacity: 0.25;
     }
   }
 
@@ -91,7 +91,7 @@ export const TextArea = styled(TextareaAutosize)`
   resize: none;
 
   &::placeholder {
-    opacity: 0.5;
+    opacity: 0.25;
   }
 `;
 
@@ -102,6 +102,19 @@ export const Button = styled.button.attrs({ type: 'submit' })`
   font-family: Arial;
   font-size: 1.1rem;
 
-  display: block;
   margin: 1rem 1em 0 auto;
+`;
+
+export const DeleteButton = styled.button`
+  color: #b70635;
+
+  text-transform: uppercase;
+  font-family: Arial;
+  font-size: 1.1rem;
+
+  margin: 1rem 1em 0 auto;
+`;
+
+export const ButtonsContainer = styled.div`
+  display: flex;
 `;
